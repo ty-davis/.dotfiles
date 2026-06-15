@@ -20,24 +20,24 @@
 }
 
 #workspaces {
-  padding: 1px;
   padding-right: 6px;
   margin: 4px;
+}
+
+#workspaces button {
+  all: initial;
+  padding: 0px 16px 0px 9px;
+  margin: 0 2.5px;
+  min-width: 9px;
+  background: none;
   border: 1px solid rgba(256, 256, 256, 0.3);
   border-radius: 100px;
   background-color: rgba(256, 256, 256, 0.1);
 }
 
-#workspaces button {
-  all: initial;
-  padding: 0 6px;
-  margin: 0 1.5px;
-  min-width: 9px;
-  background: none;
-}
-
 #workspaces button label {
   background-color: rgba(256, 256, 256, 0.1);
+  font-size: 14px;
   padding: 0.5px;
 }
 
