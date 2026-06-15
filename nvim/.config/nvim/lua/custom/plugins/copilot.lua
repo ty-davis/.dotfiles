@@ -32,7 +32,6 @@ return {
         mappings = {
           reset = {
             normal = '<leader>ccl',
-            callback = function(chat) chat:reset() end,
           },
         },
         prompts = {
