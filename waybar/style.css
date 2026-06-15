@@ -1,0 +1,148 @@
+@import "../omarchy/current/theme/waybar.css";
+
+* {
+  background-color: @background;
+  color: @foreground;
+
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  font-family: 'JetBrainsMono Nerd Font';
+  font-size: 12px;
+}
+
+.modules-left {
+  margin-left: 8px;
+}
+
+.modules-right {
+  margin-right: 8px;
+}
+
+#workspaces {
+  padding: 1px;
+  padding-right: 6px;
+  margin: 4px;
+  border: 1px solid rgba(256, 256, 256, 0.3);
+  border-radius: 100px;
+  background-color: rgba(256, 256, 256, 0.1);
+}
+
+#workspaces button {
+  all: initial;
+  padding: 0 6px;
+  margin: 0 1.5px;
+  min-width: 9px;
+  background: none;
+}
+
+#workspaces button label {
+  background-color: rgba(256, 256, 256, 0.1);
+  padding: 0.5px;
+}
+
+#workspaces button.visible label {
+  color: #6661e3;
+}
+
+#workspaces button.active label {
+  color: #66e361;
+}
+
+#workspaces button.empty {
+  opacity: 0.5;
+}
+
+window#waybar.empty #window {
+  opacity: 0;
+}
+
+#window {
+  margin-left: 8px;
+}
+
+#window label {
+  background-color: rgba(256, 256, 256, 0.06);
+  border-top: 2px solid rgba(256, 256, 256, 0.12);
+  padding: 0px 15px;
+}
+
+#cpu,
+#battery,
+#pulseaudio,
+#custom-omarchy,
+#custom-update {
+  min-width: 12px;
+  margin: 0 7.5px;
+}
+
+#tray {
+  margin-right: 16px;
+}
+
+#bluetooth {
+  margin-right: 17px;
+}
+
+#network {
+  margin-right: 13px;
+}
+
+#custom-expand-icon {
+  margin-right: 18px;
+}
+
+tooltip {
+  padding: 2px;
+}
+
+#custom-update {
+  font-size: 10px;
+}
+
+#clock {
+  margin-left: 8.75px;
+}
+
+#custom-weather {
+  margin-left: 7.5px;
+  margin-right: 7.5px;
+}
+
+#custom-weather.unavailable {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+#custom-screenrecording-indicator,
+#custom-idle-indicator,
+#custom-notification-silencing-indicator {
+  min-width: 12px;
+  margin-left: 5px;
+  margin-right: 0;
+  font-size: 10px;
+  padding-bottom: 1px;
+}
+
+#custom-screenrecording-indicator.active {
+  color: #a55555;
+}
+
+#custom-idle-indicator.active,
+#custom-notification-silencing-indicator.active {
+  color: #a55555;
+}
+
+#custom-voxtype {
+  min-width: 12px;
+  margin: 0 0 0 7.5px;
+}
+
+#custom-voxtype.recording {
+  color: #a55555;
+}
