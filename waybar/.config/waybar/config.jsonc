@@ -56,6 +56,7 @@
       "(.*) - Jira$": "\ue75c $1",
       "(.*) \\| Microsoft Teams$": "\udb80\udebb $1",
       "(\\[\\d+/\\d+\\] )?tydav@tydav-arch-legion:(.*)": "\uf120  $2",
+      "(.*) - Obsidian \\d.*": "\uf4f6  $1",
     },
     "separate-outputs": true
   },
