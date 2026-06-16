@@ -25,13 +25,14 @@
       "class<brave-cityspark.atlassian.net__jira_software_c_projects_CIT_boards_14-Default>": "\ue75c",
       "class<org.wezfurlong.wezterm>": "\uf120",
       "class<brave-gmail.com__-Default>": "\udb80\udeab",
-      "class<brave-perplexity.ai__-Default>": "\udb80\udeab",
+      // "class<brave-perplexity.ai__-Default>": "",
       "class<obsidian>": "\uf4f6",
       "class<Github>": "\uf09b",
       "class<brave-github.com__-Default>": "\uf09b",
       "class<code>": "\ue8da",
       "class<jetbrains-rider>": "\ue88f",
       "class<waybar>": "W",
+      "class<MongoDB Compass>": "\ue7a4",
       "class<chrome-faolnafnngnfdaknnbpnkhgohbobgegn-Default>": "\udb83\udd22"
     },
     "persistent-workspaces": {
