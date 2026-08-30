@@ -608,10 +608,21 @@ do
   --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
   --  See `:help lsp-config` for information about keys and how to configure
   ---@type table<string, vim.lsp.Config>
+  local dotnet_root = vim.env.DOTNET_ROOT
+  if not dotnet_root or dotnet_root == '' then
+    local arch_dotnet_root = '/usr/share/dotnet'
+    if vim.fn.isdirectory(arch_dotnet_root .. '/sdk') == 1 then dotnet_root = arch_dotnet_root end
+  end
+
   local servers = {
     -- clangd = {},
+    csharp_ls = dotnet_root and {
+      cmd_env = {
+        DOTNET_ROOT = dotnet_root,
+      },
+    } or {},
     -- gopls = {},
-    -- pyright = {},
+    pyright = {},
     -- rust_analyzer = {},
     --
     -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -673,9 +684,7 @@ do
     -- vim.lsp.enable(name)
   end
 
-  require('mason-lspconfig').setup {
-    -- automatic_enable = true is already default
-  }
+  require('mason-lspconfig').setup {}
 
   -- Ensure the servers and tools above are installed
   --
