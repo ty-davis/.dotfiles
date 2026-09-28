@@ -5,6 +5,20 @@ for the neovim editor. It includes a few plugins that
 I have enjoyed using, and a small rework of the ./lua/custom/plugins/init.lua
 file to rework some of the dependency resolution process.
 
+## C# debugging
+
+This config includes `nvim-dap`, `nvim-dap-ui`, and Mason wiring for the
+`coreclr` adapter (`netcoredbg`).
+
+- Open a `.cs` file and press `<F5>` to start debugging.
+- Pick `NetCoreDbg: Launch` to launch a compiled `.dll`. If more than one build
+  output is found under `bin/Debug` or `bin/Release`, you will be prompted to
+  choose one.
+- Pick `NetCoreDbg: Attach` to attach to an already-running .NET process.
+- Use `<leader>db` to toggle a breakpoint, `<leader>dB` for a conditional
+  breakpoint, `<F1>/<F2>/<F3>` to step, `<F7>` to toggle the debug UI, and
+  `<leader>dr` to open the DAP REPL.
+
 
 # kickstart.nvim
 

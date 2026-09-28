@@ -1,5 +1,7 @@
 local wezterm = require('wezterm')
 local act = wezterm.action
+local mux = wezterm.mux
+local local_overrides = require('local_overrides')
 local state_manager = require('state_manager')
 local project_commands = require('project_commands')
 
@@ -8,16 +10,18 @@ local config = wezterm.config_builder()
 -- get the local config and load it if it's present
 local state_file
 local function load_local_config()
-    local local_config_path = wezterm.config_dir .. '/local/init.lua'
-    local local_result, err = loadfile(local_config_path)
-    if local_result then
-        local local_result_tab = local_result()
-        state_file = local_result_tab.state_file
-        return local_result_tab.local_config
-    else
-        wezterm.log_info("No local configuration was found, or there was an error loading it: " .. (err or "unknown error"))
-        return {}
-    end
+    local local_result = local_overrides.load()
+    state_file = local_result.state_file
+    return local_result.local_config
+end
+
+local function scrub_deprecated_state(state)
+    state.current_background_image = nil
+    return state
+end
+
+local function sync_background(window)
+    local_overrides.sync_window_background(window)
 end
 
 -- colorscheme and font
@@ -40,7 +44,7 @@ config.initial_cols = 100
 
 -- custom commands for the command palette
 local function toggle_background(win, pane)
-    local state = state_manager.read_state(state_file)
+    local state = scrub_deprecated_state(state_manager.read_state(state_file))
 
     state.use_background_image = not state.use_background_image
     state_manager.write_state(state, state_file)
@@ -48,7 +52,7 @@ local function toggle_background(win, pane)
 end
 
 local function toggle_ligatures(win, pane)
-    local state = state_manager.read_state(state_file)
+    local state = scrub_deprecated_state(state_manager.read_state(state_file))
 
     state.use_ligatures = not state.use_ligatures
 
@@ -92,6 +96,27 @@ wezterm.on('augment-command-palette', function(win, pane)
     return new_commands
 end)
 
+wezterm.on('window-config-reloaded', function(window, pane)
+    sync_background(window)
+end)
+
+wezterm.on('window-focus-changed', function(window, pane)
+    sync_background(window)
+end)
+
+wezterm.on('window-resized', function(window, pane)
+    sync_background(window)
+end)
+
+wezterm.on('gui-attached', function(domain)
+    for _, mux_window in ipairs(mux.all_windows()) do
+        local window = mux_window:gui_window()
+        if window then
+            sync_background(window)
+        end
+    end
+end)
+
 -- config.keys = {
 --     {key = "H", mods="CTRL|"}
 -- }
@@ -110,8 +135,8 @@ end
 config.launch_menu = launch_menu
 
 
-local local_config = load_local_config()
-for k, v in pairs(local_config) do
+local loaded_local_config = load_local_config()
+for k, v in pairs(loaded_local_config) do
     config[k] = v
 end
 
