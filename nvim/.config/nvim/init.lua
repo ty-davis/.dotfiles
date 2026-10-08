@@ -120,6 +120,10 @@ do
     },
   }
 
+  vim.keymap.set('n', '<leader>e', function()
+    vim.diagnostic.open_float { scope = 'line' }
+  end, { desc = 'Show diagnostic on current line' })
+
   vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
   -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
@@ -150,6 +154,13 @@ do
   vim.keymap.set('n', 'k', 'gk', { desc = 'Move down by visual line '})
   vim.keymap.set('v', 'j', 'gj', { desc = 'Move down by visual line '})
   vim.keymap.set('v', 'k', 'gk', { desc = 'Move down by visual line '})
+
+  vim.keymap.set("n", "<leader>cp", function()
+    local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
+    vim.fn.setreg("+", path)
+  end, { desc = "Copy current buffer's relative path" })
+
+
 
   -- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
   -- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
